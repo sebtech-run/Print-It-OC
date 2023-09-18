@@ -21,7 +21,7 @@ const leftArrow= document.querySelector('.arrow_left');
 const rightArrow= document.querySelector('.arrow_right');
 const imgSlide= document.querySelector('.banner-img');
 const nomBannerSlide= document.querySelector('.banner-text');
-const dots= document.querySelector('.dot_selected');
+const listDot= document.querySelectorAll(".dot");
 
 let displaySlide= 0;
 
@@ -34,7 +34,9 @@ leftArrow.addEventListener("click", function() {
 	else {
 		displaySlide--;
 	}
+
 	displayCaroussel(displaySlide);
+
 })
 
 rightArrow.addEventListener("click", function() {
@@ -45,14 +47,38 @@ rightArrow.addEventListener("click", function() {
 	else{
 		displaySlide++;
 	}
+
 	displayCaroussel(displaySlide);
+
 })
+
+
+function displayDot() {
+
+	for(let i = 0; i < listDot.length; i++) {
+
+		const dot = listDot[i];
+
+		if(i == displaySlide) {
+
+			dot.classList.add('dot_selected');
+		}
+		else {
+			dot.classList.remove('dot_selected');
+		}
+	}
+}
 
 function displayCaroussel(displaySlide) {
 
 	const element = slides[displaySlide];
 	imgSlide.setAttribute("src" , "./assets/images/slideshow/"+ element.image);
-	nomBannerSlide.innerHTML= element.tagLine;	
+	nomBannerSlide.innerHTML= element.tagLine;
+
+	displayDot();
+	
 }
+
+
 
 
