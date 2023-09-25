@@ -26,6 +26,7 @@ const listDot= document.querySelectorAll(".dot");
 let displaySlide= 0;
 
 
+
 leftArrow.addEventListener("click", function() {
 
 	if (displaySlide==0) {
@@ -36,10 +37,9 @@ leftArrow.addEventListener("click", function() {
 	}
 
 	displayCaroussel(displaySlide);
-
 })
 
-rightArrow.addEventListener("click", function() {
+rightArrow.addEventListener("click", function () {
 
 	if (displaySlide==slides.length-1) {
 		displaySlide=0;
@@ -49,7 +49,7 @@ rightArrow.addEventListener("click", function() {
 	}
 
 	displayCaroussel(displaySlide);
-
+	
 })
 
 
@@ -69,8 +69,21 @@ function displayDot() {
 	}
 }
 
-function displayCaroussel(displaySlide) {
 
+setInterval( function() {
+
+	if (displaySlide==slides.length-1) {
+		displaySlide=0;
+	}
+	else{
+		displaySlide++;
+	}
+
+	displayCaroussel(displaySlide);
+}, 4000);
+
+function displayCaroussel(index) {
+	displaySlide= index;
 	const element = slides[displaySlide];
 	imgSlide.setAttribute("src" , "./assets/images/slideshow/"+ element.image);
 	nomBannerSlide.innerHTML= element.tagLine;
@@ -78,6 +91,18 @@ function displayCaroussel(displaySlide) {
 	displayDot();
 	
 }
+
+
+for(let i = 0; i < listDot.length; i++) {
+
+	listDot[i].addEventListener('click', function() {
+
+		displayCaroussel(i);
+
+
+	})
+}
+
 
 
 
